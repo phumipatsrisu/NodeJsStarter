@@ -1,0 +1,6 @@
+--setup--
+npm init -y
+npm install express
+
+--Run Server--
+npm install nodemon
