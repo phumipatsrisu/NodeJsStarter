@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { createData, removeData } from "../../functions/product";
+import { Link } from "react-router-dom";
 const url = import.meta.env.VITE_API + "product/";
 const FormProduct = () => {
   const [data, setData] = useState([]);
   const [form, setForm] = useState({});
-  
+
   const loadData = async () => {
     try {
       const res = await axios.get(url);
@@ -14,8 +15,9 @@ const FormProduct = () => {
       console.log(error);
     }
   };
-  
+
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadData();
   }, []);
 
@@ -81,6 +83,7 @@ const FormProduct = () => {
             <th className="border">Detail</th>
             <th className="border">Price</th>
             <th className="border">Aciton</th>
+            <th className="border">Edit</th>
           </tr>
         </thead>
         <tbody>
@@ -96,6 +99,9 @@ const FormProduct = () => {
                     onClick={() => handleRemove(item._id)}
                   >
                     delete
+                  </td>
+                  <td className="border bg-red-300">
+                    <Link to={"/edit/" + item._id}>Edit</Link>
                   </td>
                 </tr>
               ))
